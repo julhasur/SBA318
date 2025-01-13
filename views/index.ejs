@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>RESTful API Interaction</title>
 </head>
 <body>
-    <h1>Welcome to My Express Shopping Appp</h1>
+    <h1>Welcome to the API Shoppingi App</h1>
 
-    <form action="/api/items" method="POST">
-        <label for="name">Item Name:</label>
+    <h2>Add a User</h2>
+    <form action="/api/users" method="POST">
+        <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-        <button type="submit">Add Item</button>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <button type="submit">Add User</button>
     </form>
 
-    <h2>Items</h2>
+    <h2>Users</h2>
     <ul>
-        <% items.forEach(item => { %>
-            <li><%= item.name %>: <%= item.description %></li>
-        <% }); %>
+        <% users.forEach(user => { %>
+            <li>
+                <%= user.name %> (<%= user.email %>, <%= user.age %>)
+                <form action="/api/users/<%= user.id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
     </ul>
-    
-    
+
+    <a href="/posts">Go to Posts</a>
 </body>
 </html>
